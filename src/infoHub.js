@@ -110,8 +110,8 @@ export const getData = (function() {
     }
 
     //Checks local storage for previously saved location. Returns blank if empty
-    function getDefaultLocation () {
-        return localStorage.getItem('savedLocation') || 'Fort Collins';
+    function getSavedLocation () {
+        return localStorage.getItem('savedLocation' || '');
     }
 
     //Save the searched for location
@@ -123,11 +123,15 @@ export const getData = (function() {
     async function getDataFromSearch () {
         try {
             const locationInput = updateDOM.getInput();
+
+            //Save this search to local storage
+            setSavedLocation(locationInput);
+
+            //Get weather data
             const locationData = await getData.getWeatherData(locationInput);
             console.log(locationData.conditionText);
+            //Get weather condition text to generate gif
             const locationCondition = locationData.conditionText;
-            // const locationCondition = await getCondition(locationInput);
-            //alert(locationCondition);
             const locationGif = await getData.getGif(locationCondition);
 
             //Update display with location data and gif
@@ -147,7 +151,7 @@ export const getData = (function() {
     return {
         getWeatherData,
         getGif,
-        getDefaultLocation,
+        getSavedLocation,
         setSavedLocation,
         getDataFromSearch,
     }

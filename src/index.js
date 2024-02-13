@@ -10,7 +10,7 @@ const initializer = (function() {
     
     async function defaults () {
         try {
-            const startingLoc = getData.getDefaultLocation;
+            const startingLoc = getData.getSavedLocation();
             const startingLocData = await getData.getWeatherData(startingLoc);
             const startingConditionText = startingLocData.conditionText;
             const startingGif = await getData.getGif(startingConditionText);
