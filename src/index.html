@@ -8,37 +8,43 @@
     <script type="module" src="../dist/main.js"></script>
 </head>
 <body>
-    <div id="changeMeasure">
-        <span id="measurement">F</span>
-    </div>
     <div id="catchAll">
-        <div id="searchArea">
-
+        <div id="changeMeasure">
+            <span id="measurement">F / MPH</span>
         </div>
-        <div id="dataDisplay">
-            <div id="dataTitleArea">
-                <h1 id="showLocation">Location</h1>
+        <div id="contentArea">
+            <div id="searchArea">
+                <input name ="searchBar" type ="text" id="searchBar">
+                <button id="searchButton">Get Weather</button>
+                <label for="searchBar">Uh oh!</label>
             </div>
-            <div id="dataGif">
-                <img src="" alt="" id="showGif">
-            </div>
-            <div id="dataStats">
-                <div id="dataCondition">
-                    <span id="showCondition">Condition</span>
+            <div id="dataDisplay">
+                <div id="dataTitleArea">
+                    <h1 id="showLocation">Location</h1>
                 </div>
-                <div id="dataTemp">
-                    <span id="showTemp">34F</span>
+                <div id="dataGif">
+                    <img src="" alt="" id="showGif">
                 </div>
-                <div id="dataFeelsLike">
-                    <span>Feels like </span><span id="showFeelsLike">30F</span>
-                </div>
-                <div id="dataWind">
-                    <span>Wind: </span><span id="showWind">7MPH</span>
+                <div id="dataStats">
+                    <div id="dataCondition">
+                        <span id="showCondition">Condition</span>
+                    </div>
+                    <div id="dataTemp">
+                        <span id="showTemp">34F</span>
+                    </div>
+                    <div id="dataFeelsLike">
+                        <span>Feels like </span><span id="showFeelsLike">30F</span>
+                    </div>
+                    <div id="dataWind">
+                        <span>Wind: </span><span id="showWind">7MPH</span>
+                    </div>
                 </div>
             </div>
         </div>
+        <div id="mainFooter">
+            <span>Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a></span>
+        </div>
+ 
     </div>
-
-    <!-- Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a> -->
 </body>
 </html>

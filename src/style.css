@@ -1,3 +1,25 @@
 :root {
-    background-color: aquamarine;
+    background-color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#changeMeasure {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+#measurement {
+
+}
+
+#catchAll

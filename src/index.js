@@ -27,5 +27,6 @@ const initializer = (function() {
     }
 
     defaults();
+    updateDOM.addListeners();
 
 })();

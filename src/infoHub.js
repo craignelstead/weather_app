@@ -10,8 +10,6 @@ export const getData = (function() {
                 '&days=3&aqi=no&alerts=no', {mode: 'cors'});
             const weatherData = await response.json();
 
-            console.log(weatherData);
-
             //Get specific conditions
             const conditionText = weatherData.current.condition.text;
             const conditionIcon = weatherData.current.condition.icon;
@@ -101,7 +99,8 @@ export const getData = (function() {
     async function getGif (currentWeather) {
         try {
             const baseURL = 'https://api.giphy.com/v1/gifs/translate?api_key=Z8hw92W961WfR8SR0iFcVp1smAxV7z9L&s=';
-            const response = await fetch(baseURL + currentWeather, {mode: 'cors'});
+            const response = await fetch(baseURL + currentWeather + 'weather', 
+                {mode: 'cors'});
             const gifData = await response.json();
             return gifData.data.images.original.url;
         } catch {
@@ -120,11 +119,37 @@ export const getData = (function() {
         localStorage.setItem('savedLocation', locationInput);
     }
 
+    //Update weather data when new location is entered
+    async function getDataFromSearch () {
+        try {
+            const locationInput = updateDOM.getInput();
+            const locationData = await getData.getWeatherData(locationInput);
+            console.log(locationData.conditionText);
+            const locationCondition = locationData.conditionText;
+            // const locationCondition = await getCondition(locationInput);
+            //alert(locationCondition);
+            const locationGif = await getData.getGif(locationCondition);
+
+            //Update display with location data and gif
+            updateDOM.showLocationData(
+                locationData,
+                locationGif
+            );
+
+            updateDOM.updateGifUrl(locationGif);
+
+        } catch {
+            //Add error handling here
+            console.error(Error);
+        }
+    }
+
     return {
         getWeatherData,
         getGif,
         getDefaultLocation,
         setSavedLocation,
+        getDataFromSearch,
     }
 })();
 
@@ -222,3 +247,15 @@ export const WeatherLocation = (
         overmorrowIcon,
     }
 }
+
+export const determineDisplay = (function() {
+
+    function checkForC(temp) {
+        
+    }
+
+    return {
+        checkForC,
+    }
+
+})();
