@@ -46,6 +46,15 @@ export const getData = (function() {
             const tomorrowCondition = weatherData.forecast.forecastday[1].day.condition.text;
             const tomorrowIcon = weatherData.forecast.forecastday[1].day.condition.icon;
 
+            //Day after tomorrow forecast (apparently called overmorrow)
+            const overmorrowDate = weatherData.forecast.forecastday[2].date;
+            const overmorrowHighF = weatherData.forecast.forecastday[2].day.maxtemp_f;
+            const overmorrowLowF = weatherData.forecast.forecastday[2].day.mintemp_f;
+            const overmorrowHighC = weatherData.forecast.forecastday[2].day.maxtemp_c;
+            const overmorrowLowC = weatherData.forecast.forecastday[2].day.mintemp_c;
+            const overmorrowCondition = weatherData.forecast.forecastday[2].day.condition.text;
+            const overmorrowIcon = weatherData.forecast.forecastday[2].day.condition.icon;
+
             //Create new object with weather info
             const myLocationData = WeatherLocation(
                 location,
@@ -70,6 +79,13 @@ export const getData = (function() {
                 tomorrowLowC,
                 tomorrowCondition,
                 tomorrowIcon,
+                overmorrowDate,
+                overmorrowHighF,
+                overmorrowLowF,
+                overmorrowHighC,
+                overmorrowLowC,
+                overmorrowCondition,
+                overmorrowIcon,
             );
             return myLocationData;
         } catch {
@@ -136,6 +152,13 @@ export const WeatherLocation = (
     tomorrowLowC,
     tomorrowCondition,
     tomorrowIcon,
+    overmorrowDate,
+    overmorrowHighF,
+    overmorrowLowF,
+    overmorrowHighC,
+    overmorrowLowC,
+    overmorrowCondition,
+    overmorrowIcon,
     ) => {
         location = location;
         region = region,
@@ -159,6 +182,13 @@ export const WeatherLocation = (
         tomorrowLowC = tomorrowLowC;
         tomorrowCondition = tomorrowCondition;
         tomorrowIcon = tomorrowIcon;
+        overmorrowDate = overmorrowDate;
+        overmorrowHighF = overmorrowHighF;
+        overmorrowLowF = overmorrowLowF;
+        overmorrowHighC = overmorrowHighC;
+        overmorrowLowC = overmorrowLowC;
+        overmorrowCondition = overmorrowCondition;
+        overmorrowIcon = overmorrowIcon;
 
     return {
         location,
@@ -183,5 +213,12 @@ export const WeatherLocation = (
         tomorrowLowC,
         tomorrowCondition,
         tomorrowIcon,
+        overmorrowDate,
+        overmorrowHighF,
+        overmorrowLowF,
+        overmorrowHighC,
+        overmorrowLowC,
+        overmorrowCondition,
+        overmorrowIcon,
     }
 }
