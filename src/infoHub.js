@@ -14,8 +14,8 @@ export const getData = (function() {
             const conditionText = weatherData.current.condition.text;
             const conditionIcon = weatherData.current.condition.icon;
 
-            const tempC = weatherData.current.temp_c;
-            const tempF = weatherData.current.temp_f;
+            const tempC = Math.round(weatherData.current.temp_c);
+            const tempF = Math.round(weatherData.current.temp_f);
 
             const feelsLikeC = weatherData.current.feelslike_c;
             const feelsLikeF = weatherData.current.feelslike_f;
@@ -96,18 +96,18 @@ export const getData = (function() {
 
     //Retreive gif from Giphy based on current weather conditions
     //Returns url of gif
-    async function getGif (currentWeather) {
-        try {
-            const baseURL = 'https://api.giphy.com/v1/gifs/translate?api_key=Z8hw92W961WfR8SR0iFcVp1smAxV7z9L&s=';
-            const response = await fetch(baseURL + currentWeather + 'weather', 
-                {mode: 'cors'});
-            const gifData = await response.json();
-            return gifData.data.images.original.url;
-        } catch {
-            //Add error handling here
-            console.error(Error);
-        }
-    }
+    // async function getGif (currentWeather) {
+    //     try {
+    //         const baseURL = 'https://api.giphy.com/v1/gifs/translate?api_key=Z8hw92W961WfR8SR0iFcVp1smAxV7z9L&s=';
+    //         const response = await fetch(baseURL + currentWeather + 'weather', 
+    //             {mode: 'cors'});
+    //         const gifData = await response.json();
+    //         return gifData.data.images.original.url;
+    //     } catch {
+    //         //Add error handling here
+    //         console.error(Error);
+    //     }
+    // }
 
     //Checks local storage for previously saved location. Returns blank if empty
     function getSavedLocation () {
@@ -131,16 +131,13 @@ export const getData = (function() {
             const locationData = await getData.getWeatherData(locationInput);
             console.log(locationData.conditionText);
             //Get weather condition text to generate gif
-            const locationCondition = locationData.conditionText;
-            const locationGif = await getData.getGif(locationCondition);
+            // const locationCondition = locationData.conditionText;
+            // const locationGif = await getData.getGif(locationCondition);
 
-            //Update display with location data and gif
+            //Update display with location data
             updateDOM.showLocationData(
                 locationData,
-                locationGif
             );
-
-            updateDOM.updateGifUrl(locationGif);
 
         } catch {
             //Add error handling here
@@ -150,7 +147,6 @@ export const getData = (function() {
 
     return {
         getWeatherData,
-        getGif,
         getSavedLocation,
         setSavedLocation,
         getDataFromSearch,

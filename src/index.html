@@ -8,36 +8,50 @@
     <script type="module" src="../dist/main.js"></script>
 </head>
 <body>
-    <div id="catchAll">
+    <div id="catchAll" class="dayBG">
         <div id="changeMeasure">
             <span id="measurement">F / MPH</span>
         </div>
         <div id="contentArea">
             <div id="searchArea">
-                <input name ="searchBar" type ="text" id="searchBar">
-                <button id="searchButton">Get Weather</button>
-                <label for="searchBar">Uh oh!</label>
+                <input name ="searchBar" type ="text" id="searchBar" 
+                    placeholder="Search for a location">
+                <img id="searchButton" src="./images/search.svg" 
+                    alt="Search Button">
+                <label id ="searchMessage" for="searchBar">Uh oh!</label>
             </div>
             <div id="dataDisplay">
                 <div id="dataTitleArea">
                     <h1 id="showLocation">Location</h1>
                 </div>
-                <div id="dataGif">
-                    <img src="" alt="" id="showGif">
+                <div id="dataCondition">
+                    <span id="showCondition">Condition</span>
                 </div>
-                <div id="dataStats">
-                    <div id="dataCondition">
-                        <span id="showCondition">Condition</span>
-                    </div>
-                    <div id="dataTemp">
-                        <span id="showTemp">34F</span>
-                    </div>
-                    <div id="dataFeelsLike">
-                        <span>Feels like </span><span id="showFeelsLike">30F</span>
-                    </div>
-                    <div id="dataWind">
-                        <span>Wind: </span><span id="showWind">7MPH</span>
-                    </div>
+                <div id="dataTemp">
+                    <span id="showTemp">34F</span>
+                </div>
+                <div id="dataIcon">
+                    <img src="" alt="" id="showIcon">
+                </div>
+                <div id="dataFeelsLike">
+                    <span>Feels like </span><span id="showFeelsLike">30F</span>
+                </div>
+                <div id="dataHighLow">
+                    <span id="showHighLow">High: Low: </span>
+                </div>
+                <div id="dataWind">
+                    <span>Wind: </span><span id="showWind">7MPH</span>
+                </div>
+                <div id="forecast"><span>Forecast</span></div>
+                <div id="tomorrowArea">
+                    <span id="tomorrowDate">Tomorrow Date</span>
+                    <img src="" alt="" id="tomorrowIcon">
+                    <span id="tomorrowHighLow">60F/20F</span>
+                </div>
+                <div id="overmorrowArea">
+                    <span id="overmorrowDate">Overmorrow Date</span>
+                    <img src="" alt="" id="overmorrowIcon">
+                    <span id="overmorrowHighLow">-50F/-80F</span>
                 </div>
             </div>
         </div>

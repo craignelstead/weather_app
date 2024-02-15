@@ -6,6 +6,17 @@
 body {
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.dayBG {
+    background-image: linear-gradient(to top, #d4dff0, #becfee, #abbfeb, #99afe7, #8a9ee3);
+}
+
+.nightBG {
+    background-image: linear-gradient(to top, #0d59cf, #174baf, #1a3e90, #1a3172, #172555);
 }
 
 #changeMeasure {
@@ -18,8 +29,154 @@ body {
     border-radius: 10px;
 }
 
+#changeMeasure:hover {
+
+}
+
 #measurement {
 
 }
 
-#catchAll
+#catchAll {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+}
+
+#contentArea {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 10%;
+    align-items: center;
+}
+
+#searchArea {
+    margin-top: 30px;
+    display: grid;
+    grid-template: 2fr 1fr / minmax(200px, 400px) 30px;
+    grid-template-areas:
+        'box button'
+        'label label' ;
+    align-items: center;
+}
+
+#searchBar {
+    grid-area: box;
+    border-radius: 20px;
+    height: 30px;
+    padding-left: 30px;
+    font-size: 1.5rem;
+}
+
+#searchButton {
+    grid-area: button;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+    border: 5px;
+}
+
+#searchMessage {
+    grid-area: label;
+    justify-self: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#dataDisplay {
+    width: 50%;
+    font-size: 1.2rem;
+    display: grid;
+    grid-template: 1fr .5fr .5fr .5fr .5fr .75fr .75fr/ repeat(4, 1fr);
+    grid-template-areas: 
+        'title title title title'
+        'temp icon condition condition'
+        'temp icon feelslike feelslike'
+        'highlow highlow wind wind'
+        'forecast forecast forecast forecast'
+        'tomorrow tomorrow tomorrow tomorrow'
+        'overmorrow overmorrow overmorrow overmorrow';
+}
+
+#dataDisplay>div {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#dataTitleArea {
+    grid-area: title;
+    text-align: center;
+}
+
+#showLocation {
+
+}
+
+#dataTemp {
+    grid-area: temp;
+    font-size: 4rem;
+    display: flex;
+    text-align: center;
+}
+
+#dataIcon {
+    grid-area: icon;
+    display: flex;
+    justify-content: center;
+}
+
+#showIcon {
+    height: 100%;
+    width: 100%;
+    padding: 10%;
+}
+
+#dataCondition {
+    grid-area: condition;
+    text-align: right;
+}
+
+#dataFeelsLike {
+    grid-area: feelslike;
+    text-align: right;
+}
+
+#dataHighLow {
+    grid-area: highlow;
+}
+
+#dataWind {
+    grid-area: wind;
+    text-align: right;
+}
+
+#forecast {
+    grid-area: forecast;
+    text-align: center;
+}
+
+#tomorrowArea {
+    grid-area: tomorrow;
+}
+
+#overmorrowArea {
+    grid-area: overmorrow;
+}
+
+#tomorrowArea, #overmorrowArea {
+    display: flex;
+}
+
+#mainFooter {
+    justify-self: flex-end;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
