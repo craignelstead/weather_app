@@ -25,16 +25,17 @@ body {
     right: 0;
     margin: 10px;
     padding: 10px;
-    background-color: lightgray;
     border-radius: 10px;
+    transition: 0.2s;
 }
 
 #changeMeasure:hover {
-
+    cursor: pointer;
+    background-color: rgba(212, 212, 212, 0.3);
 }
 
 #measurement {
-
+    font-weight: bold;
 }
 
 #catchAll {
@@ -49,7 +50,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 80%;
-    gap: 10%;
+    gap: 30px;
     align-items: center;
 }
 
@@ -79,6 +80,14 @@ body {
     border: 5px;
 }
 
+#searchButton:hover {
+    cursor: pointer;
+}
+
+.searchButtonInvert {
+    filter: brightness(0) invert(1);
+}
+
 #searchMessage {
     grid-area: label;
     justify-self: center;
@@ -89,22 +98,22 @@ body {
 }
 
 #dataDisplay {
-    width: 50%;
+    max-width: 500px;
     font-size: 1.2rem;
     display: grid;
-    grid-template: 1fr .5fr .5fr .5fr .5fr .75fr .75fr/ repeat(4, 1fr);
+    grid-template: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr/ repeat(4, 1fr);
     grid-template-areas: 
         'title title title title'
-        'temp icon condition condition'
-        'temp icon feelslike feelslike'
-        'highlow highlow wind wind'
+        'icon temp condition condition'
+        'icon temp feelslike feelslike'
+        'icon temp wind wind'
+        'highlow highlow highlow highlow'
         'forecast forecast forecast forecast'
         'tomorrow tomorrow tomorrow tomorrow'
         'overmorrow overmorrow overmorrow overmorrow';
 }
 
 #dataDisplay>div {
-    border: 1px solid black;
     padding: 5px;
 }
 
@@ -114,7 +123,7 @@ body {
 }
 
 #showLocation {
-
+    margin: 0;
 }
 
 #dataTemp {
@@ -129,6 +138,7 @@ body {
     grid-area: icon;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #showIcon {
@@ -139,12 +149,10 @@ body {
 
 #dataCondition {
     grid-area: condition;
-    text-align: right;
 }
 
 #dataFeelsLike {
     grid-area: feelslike;
-    text-align: right;
 }
 
 #dataHighLow {
@@ -153,12 +161,21 @@ body {
 
 #dataWind {
     grid-area: wind;
-    text-align: right;
+}
+
+#dataCondition, #dataFeelsLike, #dataWind {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 #forecast {
     grid-area: forecast;
-    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
 }
 
 #tomorrowArea {
@@ -171,6 +188,19 @@ body {
 
 #tomorrowArea, #overmorrowArea {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forecastData {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.forecastData > img {
+    width: 40px;
+    height: 40px;
 }
 
 #mainFooter {

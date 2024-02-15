@@ -111,22 +111,6 @@ export const getData = (function() {
             console.error(Error);
         }
     }
-        
-
-    //Retreive gif from Giphy based on current weather conditions
-    //Returns url of gif
-    // async function getGif (currentWeather) {
-    //     try {
-    //         const baseURL = 'https://api.giphy.com/v1/gifs/translate?api_key=Z8hw92W961WfR8SR0iFcVp1smAxV7z9L&s=';
-    //         const response = await fetch(baseURL + currentWeather + 'weather', 
-    //             {mode: 'cors'});
-    //         const gifData = await response.json();
-    //         return gifData.data.images.original.url;
-    //     } catch {
-    //         //Add error handling here
-    //         console.error(Error);
-    //     }
-    // }
 
     //Checks local storage for previously saved location. Returns blank if empty
     function getSavedLocation () {
@@ -148,13 +132,9 @@ export const getData = (function() {
 
             //Get weather data
             const locationData = await getData.getWeatherData(locationInput);
-            console.log(locationData.conditionText);
-            //Get weather condition text to generate gif
-            // const locationCondition = locationData.conditionText;
-            // const locationGif = await getData.getGif(locationCondition);
 
             //Update display with location data
-            updateDOM.showLocationData(
+            updateDOM.showLocationDataF(
                 locationData,
             );
 
@@ -162,6 +142,18 @@ export const getData = (function() {
             //Add error handling here
             console.error(Error);
         }
+    }
+
+    function getSavedMeasurement () {
+        return localStorage.getItem('savedMeasurement' || '');
+    }
+
+    function setSavedMeasurement (measurement) {
+        localStorage.setItem('savedMeasurement', measurement);
+    }
+
+    function checkMeasurement (measurement) {
+        
     }
 
     return {
@@ -281,15 +273,3 @@ export const WeatherLocation = (
         overmorrowIcon,
     }
 }
-
-export const determineDisplay = (function() {
-
-    function checkForC(temp) {
-        
-    }
-
-    return {
-        checkForC,
-    }
-
-})();

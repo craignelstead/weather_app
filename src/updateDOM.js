@@ -1,12 +1,14 @@
 import { getData } from "./infoHub";
+import { format } from "date-fns";
 
 export const updateDOM = (function(doc) {
 
-    function showLocationData (location) {
-        console.log(location);
-        //Get variables
-        const catchAll = doc.getElementById('catchall');
+    function showLocationDataF (location) { 
+        console.log(location);       
+        //Set background
+        getDayOrNight(location);
 
+        //Get variables
         const showLocation = doc.getElementById('showLocation');
         const showTemp = doc.getElementById('showTemp');
         const showIcon = doc.getElementById('showIcon');
@@ -23,11 +25,47 @@ export const updateDOM = (function(doc) {
         showFeelsLike.textContent = `Feels like ${location.feelsLikeF}`;
         showHighLow.textContent = `High: ${location.todayHighF} | Low: ${location.todayLowF}`;
         showWind.textContent = `Wind: ${location.windMPH} ${location.windDir}`;
+
+        //Tomorrow's forecast
+        const tomorrowDay = doc.getElementById('tomorrowDate');
+        const tomorrowIcon = doc.getElementById('tomorrowIcon');
+        const tomorrowHighLow = doc.getElementById('tomorrowHighLow')
+
+        tomorrowDay.textContent = format(location.tomorrowDate, 'EEEE');
+        tomorrowIcon.src = location.tomorrowIcon;
+        tomorrowHighLow.textContent = `${location.tomorrowHighF} / ${location.tomorrowLowF}`;
+    
+        //Overmorrow's forecast
+        const overmorrowDay = doc.getElementById('overmorrowDate');
+        const overmorrowIcon = doc.getElementById('overmorrowIcon');
+        const overmorrowHighLow = doc.getElementById('overmorrowHighLow')
+
+        overmorrowDay.textContent = format(location.overmorrowDate, 'EEEE');
+        overmorrowIcon.src = location.overmorrowIcon;
+        overmorrowHighLow.textContent = `${location.overmorrowHighF} / ${location.overmorrowLowF}`;
+
     }
 
-    //Show the forecast
-    function showForecast (location) {
+    function showLocationDataC (location) {
 
+    }
+
+    //Toggles background
+    function getDayOrNight (location) {
+        const background = doc.getElementById('catchAll');
+        const searchBtn = doc.getElementById('searchButton');
+
+        if (location.isDay === 0) {
+            //Night time
+            background.classList.remove('dayBG');
+            background.classList.add('nightBG');
+            searchBtn.classList.add('searchButtonInvert');
+        } else {
+            //Day time
+            background.classList.remove('nightBG');
+            background.classList.add('dayBG');
+            searchBtn.classList.remove('searchButtonInvert');
+        }
     }
 
     //Returns input box value
@@ -35,10 +73,25 @@ export const updateDOM = (function(doc) {
         return doc.getElementById('searchBar').value;
     }
 
+    function swapMeasureDisplay() {
+
+    }
+
     //Add event listeners to buttons
     function addListeners () {
+        //Click search icon
         const searchBtn = doc.getElementById('searchButton');
         searchBtn.addEventListener('click', getData.getDataFromSearch);
+
+        //Press Enter on search bar
+        const searchBar = doc.getElementById('searchBar');
+        searchBar.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {getData.getDataFromSearch()}
+        });
+
+        //Change measurement
+        const changeMeasure = doc.getElementById('changeMeasure');
+        changeMeasure.addEventListener('click', swapMeasureDisplay)
     }
 
     //Called on page load to show saved input
@@ -48,8 +101,8 @@ export const updateDOM = (function(doc) {
     }
 
     return {
-        showLocationData,
-        showForecast,
+        showLocationDataF,
+        showLocationDataC,
         getInput,
         addListeners,
         showSavedInput,

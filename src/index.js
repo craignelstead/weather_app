@@ -11,13 +11,10 @@ const initializer = (function() {
         try {
             const startingLoc = getData.getSavedLocation();
             const startingLocData = await getData.getWeatherData(startingLoc);
-            // const startingConditionText = startingLocData.conditionText;
-            // const startingGif = await getData.getGif(startingConditionText);
 
             //Update display with location data
-            updateDOM.showLocationData(
+            updateDOM.showLocationDataF(
                 startingLocData,
-                //startingGif
             );
             } catch {
                 //Add error handling here
