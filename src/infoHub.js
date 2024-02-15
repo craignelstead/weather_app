@@ -133,10 +133,14 @@ export const getData = (function() {
             //Get weather data
             const locationData = await getData.getWeatherData(locationInput);
 
-            //Update display with location data
-            updateDOM.showLocationDataF(
-                locationData,
-            );
+            //Generates either F/MPH or C/KPH data
+            const unit = document.getElementById('changeMeasure').textContent;
+            if (unit === `${String.fromCharCode(176)}F / MPH`) {
+                updateDOM.showLocationDataF(locationData);
+            } else {
+                updateDOM.showLocationDataC(locationData);
+            }
+            
 
         } catch {
             //Add error handling here
@@ -158,10 +162,10 @@ export const getData = (function() {
     function changeMeasurement (measurement) {
         if (measurement.textContent === `${String.fromCharCode(176)}F / MPH`) {
             updateDOM.swapMeasureDisplay(`${String.fromCharCode(176)}C / KPH`);
-            //updateDOM.showLocationDataC()
         } else {
             updateDOM.swapMeasureDisplay(`${String.fromCharCode(176)}F / MPH`);
         }
+        getData.getDataFromSearch();
     }
 
     return {

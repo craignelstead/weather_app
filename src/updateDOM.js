@@ -3,10 +3,13 @@ import { format } from "date-fns";
 
 export const updateDOM = (function(doc) {
 
-    function showLocationDataF (location) { 
-        console.log(location);       
+    //Display info in F/MPH
+    function showLocationDataF (location) {       
         //Set background
         getDayOrNight(location);
+
+        const dataDisplay = doc.getElementById('dataDisplay');
+        dataDisplay.classList.remove('hidden');
 
         //Get variables
         const showLocation = doc.getElementById('showLocation');
@@ -46,8 +49,49 @@ export const updateDOM = (function(doc) {
 
     }
 
-    function showLocationDataC (location) {
+    //Display info in C/KPH
+    function showLocationDataC (location) {     
+        //Set background
+        getDayOrNight(location);
 
+        const dataDisplay = doc.getElementById('dataDisplay');
+        dataDisplay.classList.remove('hidden');
+
+        //Get variables
+        const showLocation = doc.getElementById('showLocation');
+        const showTemp = doc.getElementById('showTemp');
+        const showIcon = doc.getElementById('showIcon');
+        const showCondition = doc.getElementById('showCondition');
+        const showFeelsLike = doc.getElementById('showFeelsLike');
+        const showHighLow = doc.getElementById('showHighLow');
+        const showWind = doc.getElementById('showWind');
+
+        showLocation.textContent = `${location.location}`;
+        showTemp.textContent = `${location.tempC}`;
+        showIcon.src = location.conditionIcon;
+        showIcon.setAttribute('alt', location.conditionText);
+        showCondition.textContent = location.conditionText;
+        showFeelsLike.textContent = `Feels like ${location.feelsLikeC}`;
+        showHighLow.textContent = `High: ${location.todayHighC} | Low: ${location.todayLowC}`;
+        showWind.textContent = `Wind: ${location.windKPH} ${location.windDir}`;
+
+        //Tomorrow's forecast
+        const tomorrowDay = doc.getElementById('tomorrowDate');
+        const tomorrowIcon = doc.getElementById('tomorrowIcon');
+        const tomorrowHighLow = doc.getElementById('tomorrowHighLow')
+
+        tomorrowDay.textContent = format(location.tomorrowDate, 'EEEE');
+        tomorrowIcon.src = location.tomorrowIcon;
+        tomorrowHighLow.textContent = `${location.tomorrowHighC} / ${location.tomorrowLowC}`;
+    
+        //Overmorrow's forecast
+        const overmorrowDay = doc.getElementById('overmorrowDate');
+        const overmorrowIcon = doc.getElementById('overmorrowIcon');
+        const overmorrowHighLow = doc.getElementById('overmorrowHighLow')
+
+        overmorrowDay.textContent = format(location.overmorrowDate, 'EEEE');
+        overmorrowIcon.src = location.overmorrowIcon;
+        overmorrowHighLow.textContent = `${location.overmorrowHighC} / ${location.overmorrowLowC}`;
     }
 
     //Toggles background
@@ -111,6 +155,11 @@ export const updateDOM = (function(doc) {
         searchBar.value = getData.getSavedLocation();
     }
 
+    function hideData () {
+        const dataDisplay = doc.getElementById('dataDisplay');
+        dataDisplay.classList.add('hidden');
+    }
+
     return {
         showLocationDataF,
         showLocationDataC,
@@ -119,5 +168,6 @@ export const updateDOM = (function(doc) {
         showDefaultMeasurement,
         addListeners,
         showSavedInput,
+        hideData,
     }
 })(document);

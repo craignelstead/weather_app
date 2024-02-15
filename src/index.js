@@ -12,14 +12,22 @@ const initializer = (function() {
             const startingLoc = getData.getSavedLocation();
             const startingLocData = await getData.getWeatherData(startingLoc);
 
-            //Update display with location data
-            updateDOM.showLocationDataF(startingLocData,);
-
             //Update saved unit preference
             if (getData.getSavedMeasurement() === null) {
                 getData.setSavedMeasurement(`${String.fromCharCode(176)}F / MPH`);
             }
             updateDOM.showDefaultMeasurement();
+
+            //Update display with location data
+            if ((getData.getSavedMeasurement() === `${String.fromCharCode(176)}F / MPH`)
+                && (getData.getSavedLocation() != null)) {
+                    updateDOM.showLocationDataF(startingLocData);
+            } else if ((getData.getSavedMeasurement() === `${String.fromCharCode(176)}C / KPH`)
+                && (getData.getSavedLocation() != null)) {
+                    updateDOM.showLocationDataC(startingLocData);
+            } else {
+                updateDOM.hideData();
+            }
 
             } catch {
                 //Add error handling here
