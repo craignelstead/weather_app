@@ -103,12 +103,10 @@ export const updateDOM = (function(doc) {
             //Night time
             background.classList.remove('dayBG');
             background.classList.add('nightBG');
-            searchBtn.classList.add('searchButtonInvert');
         } else {
             //Day time
             background.classList.remove('nightBG');
             background.classList.add('dayBG');
-            searchBtn.classList.remove('searchButtonInvert');
         }
     }
 
@@ -160,6 +158,20 @@ export const updateDOM = (function(doc) {
         dataDisplay.classList.add('hidden');
     }
 
+    function showLoading () {
+        const catchAll = doc.getElementById('catchAll');
+        const loading = doc.createElement('img');
+        loading.src = './images/loading.gif';
+        loading.setAttribute('id', 'loading');
+        loading.setAttribute('alt', 'loading');
+        catchAll.appendChild(loading);
+    }
+
+    function removeLoading () {
+        const loading = doc.getElementById('loading');
+        loading.remove();
+    }
+
     return {
         showLocationDataF,
         showLocationDataC,
@@ -169,5 +181,7 @@ export const updateDOM = (function(doc) {
         addListeners,
         showSavedInput,
         hideData,
+        showLoading,
+        removeLoading,
     }
 })(document);

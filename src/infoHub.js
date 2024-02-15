@@ -130,6 +130,8 @@ export const getData = (function() {
             //Save this search to local storage
             setSavedLocation(locationInput);
 
+            updateDOM.showLoading();
+
             //Get weather data
             const locationData = await getData.getWeatherData(locationInput);
 
@@ -140,8 +142,8 @@ export const getData = (function() {
             } else {
                 updateDOM.showLocationDataC(locationData);
             }
-            
 
+            updateDOM.removeLoading();
         } catch {
             //Add error handling here
             console.error(Error);

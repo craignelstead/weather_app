@@ -38,6 +38,13 @@ body {
     font-weight: bold;
 }
 
+#loading {
+    position: fixed;
+    top: 20%;
+    height: 50px;
+    width: 50px;
+}
+
 #catchAll {
     display: flex;
     flex-direction: column;
@@ -66,14 +73,26 @@ body {
 
 #searchBar {
     grid-area: box;
-    border-radius: 20px;
     height: 30px;
     padding-left: 30px;
     font-size: 1.5rem;
+    color: white;
+    border: 0;
+    background: transparent;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+#searchBar:focus {
+    color: white;
+    border: 0;
+    background: rgba(212, 212, 212, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    outline: none;
 }
 
 #searchButton {
     grid-area: button;
+    filter: brightness(0) invert(1);
     width: 30px;
     height: 30px;
     padding: 10px;
@@ -82,10 +101,6 @@ body {
 
 #searchButton:hover {
     cursor: pointer;
-}
-
-.searchButtonInvert {
-    filter: brightness(0) invert(1);
 }
 
 #searchMessage {
@@ -101,7 +116,7 @@ body {
     max-width: 500px;
     font-size: 1.2rem;
     display: grid;
-    grid-template: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr/ repeat(4, 1fr);
+    grid-template: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr/ 1fr 2fr 1fr 1fr;
     grid-template-areas: 
         'title title title title'
         'icon temp condition condition'
