@@ -3,6 +3,7 @@ import { getData } from "./infoHub";
 export const updateDOM = (function(doc) {
 
     function showLocationData (location) {
+        console.log(location);
         //Get variables
         const catchAll = doc.getElementById('catchall');
 
@@ -13,11 +14,15 @@ export const updateDOM = (function(doc) {
         const showFeelsLike = doc.getElementById('showFeelsLike');
         const showHighLow = doc.getElementById('showHighLow');
         const showWind = doc.getElementById('showWind');
-        const measureDeg = 'F';
 
-        showLocation.textContent = location.location;
-        showTemp.textContent = `${location.tempF}${String.fromCharCode(176)}${measureDeg}`;
+        showLocation.textContent = `${location.location}`;
+        showTemp.textContent = `${location.tempF}`;
         showIcon.src = location.conditionIcon;
+        showIcon.setAttribute('alt', location.conditionText);
+        showCondition.textContent = location.conditionText;
+        showFeelsLike.textContent = `Feels like ${location.feelsLikeF}`;
+        showHighLow.textContent = `High: ${location.todayHighF} | Low: ${location.todayLowF}`;
+        showWind.textContent = `Wind: ${location.windMPH} ${location.windDir}`;
     }
 
     //Show the forecast

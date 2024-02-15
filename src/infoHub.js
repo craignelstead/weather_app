@@ -10,20 +10,34 @@ export const getData = (function() {
                 '&days=3&aqi=no&alerts=no', {mode: 'cors'});
             const weatherData = await response.json();
 
+            //console.log(weatherData);
+
+            const degC = `${String.fromCharCode(176)}C`;
+            const degF = `${String.fromCharCode(176)}F`;
+            const mph = `MPH`;
+            const kph = `KPH`;
+
             //Get specific conditions
             const conditionText = weatherData.current.condition.text;
             const conditionIcon = weatherData.current.condition.icon;
 
-            const tempC = Math.round(weatherData.current.temp_c);
-            const tempF = Math.round(weatherData.current.temp_f);
+            const tempC = Math.round(weatherData.current.temp_c) + degC;
+            const tempF = Math.round(weatherData.current.temp_f) + degF;
 
-            const feelsLikeC = weatherData.current.feelslike_c;
-            const feelsLikeF = weatherData.current.feelslike_f;
+            const feelsLikeC = Math.round(weatherData.current.feelslike_c) + degC;
+            const feelsLikeF = Math.round(weatherData.current.feelslike_f) + degF;
 
-            const windKPH = weatherData.current.wind_kph
-            const windMPH = weatherData.current.wind_mph;
+            const todayHighC = Math.round(weatherData.forecast.forecastday[0].day.maxtemp_c) + degC;
+            const todayHighF = Math.round(weatherData.forecast.forecastday[0].day.maxtemp_f) + degF;
 
-            const humidity = weatherData.current.humidity;
+            const todayLowC = Math.round(weatherData.forecast.forecastday[0].day.mintemp_c) + degC;
+            const todayLowF = Math.round(weatherData.forecast.forecastday[0].day.mintemp_f) + degF;
+
+            const windKPH = Math.round(weatherData.current.wind_kph) + kph;
+            const windMPH = Math.round(weatherData.current.wind_mph) + mph;
+            const windDir = weatherData.current.wind_dir;
+
+            const humidity = Math.round(weatherData.current.humidity);
 
             const isDay = weatherData.current.is_day;
 
@@ -37,19 +51,19 @@ export const getData = (function() {
 
             //Forecast info for tomorrow
             const tomorrowDate = weatherData.forecast.forecastday[1].date;
-            const tomorrowHighF = weatherData.forecast.forecastday[1].day.maxtemp_f;
-            const tomorrowLowF = weatherData.forecast.forecastday[1].day.mintemp_f;
-            const tomorrowHighC = weatherData.forecast.forecastday[1].day.maxtemp_c;
-            const tomorrowLowC = weatherData.forecast.forecastday[1].day.mintemp_c;
+            const tomorrowHighF = Math.round(weatherData.forecast.forecastday[1].day.maxtemp_f) + degF;
+            const tomorrowLowF = Math.round(weatherData.forecast.forecastday[1].day.mintemp_f) + degF;
+            const tomorrowHighC = Math.round(weatherData.forecast.forecastday[1].day.maxtemp_c) + degC;
+            const tomorrowLowC = Math.round(weatherData.forecast.forecastday[1].day.mintemp_c) + degC;
             const tomorrowCondition = weatherData.forecast.forecastday[1].day.condition.text;
             const tomorrowIcon = weatherData.forecast.forecastday[1].day.condition.icon;
 
             //Day after tomorrow forecast (apparently called overmorrow)
             const overmorrowDate = weatherData.forecast.forecastday[2].date;
-            const overmorrowHighF = weatherData.forecast.forecastday[2].day.maxtemp_f;
-            const overmorrowLowF = weatherData.forecast.forecastday[2].day.mintemp_f;
-            const overmorrowHighC = weatherData.forecast.forecastday[2].day.maxtemp_c;
-            const overmorrowLowC = weatherData.forecast.forecastday[2].day.mintemp_c;
+            const overmorrowHighF = Math.round(weatherData.forecast.forecastday[2].day.maxtemp_f) + degF;
+            const overmorrowLowF = Math.round(weatherData.forecast.forecastday[2].day.mintemp_f) + degF;
+            const overmorrowHighC = Math.round(weatherData.forecast.forecastday[2].day.maxtemp_c) + degC;
+            const overmorrowLowC = Math.round(weatherData.forecast.forecastday[2].day.mintemp_c) + degC;
             const overmorrowCondition = weatherData.forecast.forecastday[2].day.condition.text;
             const overmorrowIcon = weatherData.forecast.forecastday[2].day.condition.icon;
 
@@ -64,8 +78,13 @@ export const getData = (function() {
                 tempF,
                 feelsLikeC,
                 feelsLikeF,
+                todayHighC,
+                todayHighF,
+                todayLowC,
+                todayLowF,
                 windKPH,
                 windMPH,
+                windDir,
                 humidity,
                 isDay,
                 precipMm,
@@ -164,8 +183,13 @@ export const WeatherLocation = (
     tempF,
     feelsLikeC,
     feelsLikeF,
+    todayHighC,
+    todayHighF,
+    todayLowC,
+    todayLowF,
     windKPH,
     windMPH,
+    windDir,
     humidity,
     isDay,
     precipMm,
@@ -194,8 +218,13 @@ export const WeatherLocation = (
         tempF = tempF;
         feelsLikeC = feelsLikeC;
         feelsLikeF = feelsLikeF;
+        todayHighC = todayHighC;
+        todayHighF = todayHighF;
+        todayLowC = todayLowC;
+        todayLowF = todayLowF;
         windKPH = windKPH;
         windMPH = windMPH;
+        windDir = windDir;
         humidity = humidity;
         isDay = isDay;
         precipMm = precipMm;
@@ -225,8 +254,13 @@ export const WeatherLocation = (
         tempF,
         feelsLikeC,
         feelsLikeF,
+        todayHighC,
+        todayHighF,
+        todayLowC,
+        todayLowF,
         windKPH,
         windMPH,
+        windDir,
         humidity,
         isDay,
         precipMm,

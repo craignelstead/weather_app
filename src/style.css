@@ -122,6 +122,7 @@ body {
     font-size: 4rem;
     display: flex;
     text-align: center;
+    align-items: center;
 }
 
 #dataIcon {
