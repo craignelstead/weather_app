@@ -144,16 +144,24 @@ export const getData = (function() {
         }
     }
 
+    //Retrieves preferred unit, or sets F/MPH as default
     function getSavedMeasurement () {
-        return localStorage.getItem('savedMeasurement' || '');
+        return localStorage.getItem('savedMeasurement' || 
+            `${String.fromCharCode(176)}F / MPH`);
     }
 
     function setSavedMeasurement (measurement) {
         localStorage.setItem('savedMeasurement', measurement);
     }
 
-    function checkMeasurement (measurement) {
-        
+    //Switches between F/MPH and C/KPH
+    function changeMeasurement (measurement) {
+        if (measurement.textContent === `${String.fromCharCode(176)}F / MPH`) {
+            updateDOM.swapMeasureDisplay(`${String.fromCharCode(176)}C / KPH`);
+            //updateDOM.showLocationDataC()
+        } else {
+            updateDOM.swapMeasureDisplay(`${String.fromCharCode(176)}F / MPH`);
+        }
     }
 
     return {
@@ -161,6 +169,9 @@ export const getData = (function() {
         getSavedLocation,
         setSavedLocation,
         getDataFromSearch,
+        getSavedMeasurement,
+        setSavedMeasurement,
+        changeMeasurement,
     }
 })();
 

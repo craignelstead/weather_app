@@ -13,9 +13,14 @@ const initializer = (function() {
             const startingLocData = await getData.getWeatherData(startingLoc);
 
             //Update display with location data
-            updateDOM.showLocationDataF(
-                startingLocData,
-            );
+            updateDOM.showLocationDataF(startingLocData,);
+
+            //Update saved unit preference
+            if (getData.getSavedMeasurement() === null) {
+                getData.setSavedMeasurement(`${String.fromCharCode(176)}F / MPH`);
+            }
+            updateDOM.showDefaultMeasurement();
+
             } catch {
                 //Add error handling here
                 console.error(Error);

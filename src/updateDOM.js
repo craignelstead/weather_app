@@ -73,8 +73,16 @@ export const updateDOM = (function(doc) {
         return doc.getElementById('searchBar').value;
     }
 
-    function swapMeasureDisplay() {
+    //Change F/MPH and C/KPH
+    function swapMeasureDisplay (text) {
+        const displayUnit = doc.getElementById('changeMeasure');
+        displayUnit.textContent = text;
+    }
 
+    //Set default measurement
+    function showDefaultMeasurement () {
+        const changeMeasure = doc.getElementById('changeMeasure');
+        changeMeasure.textContent = getData.getSavedMeasurement();
     }
 
     //Add event listeners to buttons
@@ -91,7 +99,10 @@ export const updateDOM = (function(doc) {
 
         //Change measurement
         const changeMeasure = doc.getElementById('changeMeasure');
-        changeMeasure.addEventListener('click', swapMeasureDisplay)
+        changeMeasure.addEventListener('click', () => {
+            getData.changeMeasurement(changeMeasure);
+            getData.setSavedMeasurement(changeMeasure.textContent);
+        });
     }
 
     //Called on page load to show saved input
@@ -104,6 +115,8 @@ export const updateDOM = (function(doc) {
         showLocationDataF,
         showLocationDataC,
         getInput,
+        swapMeasureDisplay,
+        showDefaultMeasurement,
         addListeners,
         showSavedInput,
     }
