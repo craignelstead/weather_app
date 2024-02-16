@@ -162,10 +162,10 @@ export const updateDOM = (function(doc) {
     }
 
     //Called on page load to show saved input
-    function showSavedInput () {
-        const searchBar = doc.getElementById('searchBar');
-        searchBar.value = getData.getSavedLocation();
-    }
+    // function showSavedInput () {
+    //     const searchBar = doc.getElementById('searchBar');
+    //     //searchBar.value = getData.getSavedLocation();
+    // }
 
     //Hide data display
     function hideData () {
@@ -196,7 +196,6 @@ export const updateDOM = (function(doc) {
         if (loading != null) {
             loading.remove();
         }
-        showData();
     }
 
     //Show the current year in footer
@@ -222,7 +221,7 @@ export const updateDOM = (function(doc) {
         swapMeasureDisplay,
         showDefaultMeasurement,
         addListeners,
-        showSavedInput,
+        //showSavedInput,
         hideData,
         showLoading,
         removeLoading,

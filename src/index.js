@@ -10,7 +10,14 @@ const initializer = (function() {
     async function defaults () {
         try {
             const startingLoc = getData.getSavedLocation();
-            const startingLocData = await getData.getWeatherData(startingLoc);
+
+            //Need to adjust this so that if startingLoc === '' then it doesnt 
+            //load the display or generate data
+
+            let startingLocData;
+            
+            if (startingLoc !== '')
+                {startingLocData = await getData.getWeatherData(startingLoc);}
 
             //Update saved unit preference
             if (getData.getSavedMeasurement() === null) {
@@ -20,31 +27,29 @@ const initializer = (function() {
 
             //Update display with location data based on selected unit
             if ((getData.getSavedMeasurement() === `${String.fromCharCode(176)}F / MPH`)
-                && (getData.getSavedLocation() != null)) {
+                && (startingLoc !== null)) {
                     updateDOM.showLoading();
                     updateDOM.showLocationDataF(startingLocData);
-                    //updateDOM.removeLoading();
             } else if ((getData.getSavedMeasurement() === `${String.fromCharCode(176)}C / KPH`)
-                && (getData.getSavedLocation() != null)) {
+                && (startingLoc !== null)) {
                     updateDOM.showLoading();
                     updateDOM.showLocationDataC(startingLocData);
-                    //updateDOM.removeLoading();
             } else {
                 updateDOM.hideData();
             }
 
-            } catch(Error) {
-                //Add error handling here
-                console.error(Error);
-                updateDOM.displayError(Error);
-            } finally {
-                updateDOM.removeLoading();
-            }
+        } catch(Error) {
+            //Add error handling here
+            console.error(Error);
+            updateDOM.displayError(Error);
+        } finally {
+            updateDOM.removeLoading();
+        }
     }
 
     defaults();
     updateDOM.displayYear();
-    updateDOM.showSavedInput();
+    //updateDOM.showSavedInput();
     updateDOM.addListeners();
 
 })();
