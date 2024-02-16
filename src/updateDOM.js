@@ -11,6 +11,9 @@ export const updateDOM = (function(doc) {
         const dataDisplay = doc.getElementById('dataDisplay');
         dataDisplay.classList.remove('hidden');
 
+        updateDOM.clearMessage();
+        updateDOM.removeLoading();
+
         //Get variables
         const showLocation = doc.getElementById('showLocation');
         const showTemp = doc.getElementById('showTemp');
@@ -20,7 +23,7 @@ export const updateDOM = (function(doc) {
         const showHighLow = doc.getElementById('showHighLow');
         const showWind = doc.getElementById('showWind');
 
-        showLocation.textContent = `${location.location}`;
+        showLocation.textContent = `${location.location}, ${regionOrCountry(location)}`;
         showTemp.textContent = `${location.tempF}`;
         showIcon.src = location.conditionIcon;
         showIcon.setAttribute('alt', location.conditionText);
@@ -46,7 +49,6 @@ export const updateDOM = (function(doc) {
         overmorrowDay.textContent = format(location.overmorrowDate, 'EEEE');
         overmorrowIcon.src = location.overmorrowIcon;
         overmorrowHighLow.textContent = `${location.overmorrowHighF} / ${location.overmorrowLowF}`;
-
     }
 
     //Display info in C/KPH
@@ -57,7 +59,11 @@ export const updateDOM = (function(doc) {
         const dataDisplay = doc.getElementById('dataDisplay');
         dataDisplay.classList.remove('hidden');
 
+        updateDOM.clearMessage();
+        updateDOM.removeLoading();
+
         //Get variables
+        
         const showLocation = doc.getElementById('showLocation');
         const showTemp = doc.getElementById('showTemp');
         const showIcon = doc.getElementById('showIcon');
@@ -66,7 +72,7 @@ export const updateDOM = (function(doc) {
         const showHighLow = doc.getElementById('showHighLow');
         const showWind = doc.getElementById('showWind');
 
-        showLocation.textContent = `${location.location}`;
+        showLocation.textContent = `${location.location}, ${regionOrCountry(location)}`;
         showTemp.textContent = `${location.tempC}`;
         showIcon.src = location.conditionIcon;
         showIcon.setAttribute('alt', location.conditionText);
@@ -94,12 +100,20 @@ export const updateDOM = (function(doc) {
         overmorrowHighLow.textContent = `${location.overmorrowHighC} / ${location.overmorrowLowC}`;
     }
 
+    //Determine to show region or country
+    function regionOrCountry (location) {
+        if (location.country === 'United States of America') {
+            return location.region;
+        } else {
+            return location.country
+        }
+    }
+
     //Toggles background
     function getDayOrNight (location) {
         const background = doc.getElementById('catchAll');
-        const searchBtn = doc.getElementById('searchButton');
 
-        if (location.isDay === 0) {
+        if ((location.isDay === null || location.isDay === 0)) {
             //Night time
             background.classList.remove('dayBG');
             background.classList.add('nightBG');
@@ -153,12 +167,21 @@ export const updateDOM = (function(doc) {
         searchBar.value = getData.getSavedLocation();
     }
 
+    //Hide data display
     function hideData () {
         const dataDisplay = doc.getElementById('dataDisplay');
         dataDisplay.classList.add('hidden');
     }
 
+    //Show data display
+    function showData () {
+        const dataDisplay = doc.getElementById('dataDisplay');
+        dataDisplay.classList.remove('hidden');
+    }
+
+    //Hide data display and show loading animation
     function showLoading () {
+        hideData();
         const catchAll = doc.getElementById('catchAll');
         const loading = doc.createElement('img');
         loading.src = './images/loading.gif';
@@ -167,9 +190,29 @@ export const updateDOM = (function(doc) {
         catchAll.appendChild(loading);
     }
 
+    //Remove loading animation and show data display
     function removeLoading () {
         const loading = doc.getElementById('loading');
-        loading.remove();
+        if (loading != null) {
+            loading.remove();
+        }
+        showData();
+    }
+
+    //Show the current year in footer
+    function displayYear () {
+        const year = doc.getElementById('year');
+        year.textContent = format(Date.now(), 'yyyy');
+    }
+
+    function clearMessage () {
+        const message = doc.getElementById('searchMessage');
+        message.textContent = '';
+    }
+
+    function displayError (err) {
+        const message = doc.getElementById('searchMessage');
+        message.textContent = err.message;
     }
 
     return {
@@ -183,5 +226,8 @@ export const updateDOM = (function(doc) {
         hideData,
         showLoading,
         removeLoading,
+        displayYear,
+        clearMessage,
+        displayError,
     }
 })(document);

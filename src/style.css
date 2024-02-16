@@ -27,6 +27,7 @@ body {
     padding: 10px;
     border-radius: 10px;
     transition: 0.2s;
+    font-weight: bold;
 }
 
 #changeMeasure:hover {
@@ -34,13 +35,9 @@ body {
     background-color: rgba(212, 212, 212, 0.3);
 }
 
-#measurement {
-    font-weight: bold;
-}
-
 #loading {
     position: fixed;
-    top: 20%;
+    top: 30%;
     height: 50px;
     width: 50px;
 }
@@ -62,7 +59,7 @@ body {
 }
 
 #searchArea {
-    margin-top: 30px;
+    margin-top: 50px;
     display: grid;
     grid-template: 2fr 1fr / minmax(200px, 400px) 30px;
     grid-template-areas:
@@ -88,6 +85,8 @@ body {
     background: rgba(212, 212, 212, 0.3);
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     outline: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 #searchButton {
@@ -101,6 +100,10 @@ body {
 
 #searchButton:hover {
     cursor: pointer;
+}
+
+#searchButton:active {
+    scale: 0.8;
 }
 
 #searchMessage {
@@ -126,6 +129,12 @@ body {
         'forecast forecast forecast forecast'
         'tomorrow tomorrow tomorrow tomorrow'
         'overmorrow overmorrow overmorrow overmorrow';
+        background-color: rgba(155, 155, 155, 0.3);
+    padding: 50px;
+    border-radius: 20px;
+    -webkit-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.3);
+    -moz-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.3);
+    box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.3);
 }
 
 #dataDisplay>div {
@@ -135,6 +144,8 @@ body {
 #dataTitleArea {
     grid-area: title;
     text-align: center;
+    text-shadow: 1px 1px 2px black;
+    margin-bottom: 30px;
 }
 
 #showLocation {
@@ -147,6 +158,7 @@ body {
     display: flex;
     text-align: center;
     align-items: center;
+    text-shadow: 1px 1px 2px black;
 }
 
 #dataIcon {
@@ -157,9 +169,8 @@ body {
 }
 
 #showIcon {
-    height: 100%;
-    width: 100%;
-    padding: 10%;
+    height: 120px;
+    width: 120px;
 }
 
 #dataCondition {
@@ -191,6 +202,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 1.3rem;
+    border-bottom: 1px solid lightgray;
 }
 
 #tomorrowArea {
@@ -205,6 +217,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid lightgray;
 }
 
 .forecastData {
@@ -213,10 +226,19 @@ body {
     align-items: center;
 }
 
+.forecastData > span {
+    width: 100px;
+}
+
 .forecastData > img {
     width: 40px;
     height: 40px;
+    padding-right: 20px;
 }
+
+/* #tomorrowHighLow, #overmorrowHighLow {
+    align-self: flex-end;
+} */
 
 #mainFooter {
     justify-self: flex-end;
@@ -224,5 +246,21 @@ body {
     bottom: 0;
     display: flex;
     width: 100%;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#mainFooter>span {
+    align-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+#ghLogo {
+    height: 20px;
+    width: 20px;
 }

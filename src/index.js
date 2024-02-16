@@ -18,24 +18,32 @@ const initializer = (function() {
             }
             updateDOM.showDefaultMeasurement();
 
-            //Update display with location data
+            //Update display with location data based on selected unit
             if ((getData.getSavedMeasurement() === `${String.fromCharCode(176)}F / MPH`)
                 && (getData.getSavedLocation() != null)) {
+                    updateDOM.showLoading();
                     updateDOM.showLocationDataF(startingLocData);
+                    //updateDOM.removeLoading();
             } else if ((getData.getSavedMeasurement() === `${String.fromCharCode(176)}C / KPH`)
                 && (getData.getSavedLocation() != null)) {
+                    updateDOM.showLoading();
                     updateDOM.showLocationDataC(startingLocData);
+                    //updateDOM.removeLoading();
             } else {
                 updateDOM.hideData();
             }
 
-            } catch {
+            } catch(Error) {
                 //Add error handling here
                 console.error(Error);
+                updateDOM.displayError(Error);
+            } finally {
+                updateDOM.removeLoading();
             }
     }
 
     defaults();
+    updateDOM.displayYear();
     updateDOM.showSavedInput();
     updateDOM.addListeners();
 

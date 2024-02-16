@@ -105,10 +105,13 @@ export const getData = (function() {
                 overmorrowIcon,
             );
             return myLocationData;
-        } catch {
+        } catch(Error) {
             //Add error logic here
             //Handle API not reachable, location not found
             console.error(Error);
+            updateDOM.displayError(Error);
+        } finally {
+            updateDOM.removeLoading();
         }
     }
 
@@ -142,11 +145,12 @@ export const getData = (function() {
             } else {
                 updateDOM.showLocationDataC(locationData);
             }
-
-            updateDOM.removeLoading();
-        } catch {
+        } catch(Error) {
             //Add error handling here
             console.error(Error);
+            updateDOM.displayError(Error);
+        } finally {
+            updateDOM.removeLoading();
         }
     }
 
