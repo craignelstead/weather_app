@@ -113,7 +113,7 @@ export const updateDOM = (function(doc) {
     function getDayOrNight (location) {
         const background = doc.getElementById('catchAll');
 
-        if ((location.isDay === null || location.isDay === 0)) {
+        if ((!location.isDay || location.isDay === 0)) {
             //Night time
             background.classList.remove('dayBG');
             background.classList.add('nightBG');
@@ -161,12 +161,6 @@ export const updateDOM = (function(doc) {
         });
     }
 
-    //Called on page load to show saved input
-    // function showSavedInput () {
-    //     const searchBar = doc.getElementById('searchBar');
-    //     //searchBar.value = getData.getSavedLocation();
-    // }
-
     //Hide data display
     function hideData () {
         const dataDisplay = doc.getElementById('dataDisplay');
@@ -211,7 +205,7 @@ export const updateDOM = (function(doc) {
 
     function displayError (err) {
         const message = doc.getElementById('searchMessage');
-        message.textContent = err.message;
+        message.textContent = err;
     }
 
     return {
@@ -223,6 +217,7 @@ export const updateDOM = (function(doc) {
         addListeners,
         //showSavedInput,
         hideData,
+        showData,
         showLoading,
         removeLoading,
         displayYear,

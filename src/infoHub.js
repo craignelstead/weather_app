@@ -10,6 +10,10 @@ export const getData = (function() {
                 '&days=3&aqi=no&alerts=no', {mode: 'cors'});
             const weatherData = await response.json();
 
+            if (!weatherData.location) {
+                throw new Error('Location not found');
+            }
+
             //console.log(weatherData);
 
             const degC = `${String.fromCharCode(176)}C`;
@@ -108,8 +112,8 @@ export const getData = (function() {
         } catch(Error) {
             //Add error logic here
             //Handle API not reachable, location not found
-            console.error(Error);
             updateDOM.displayError(Error);
+            return;
         } finally {
             updateDOM.removeLoading();
         }
@@ -147,8 +151,8 @@ export const getData = (function() {
             }
         } catch(Error) {
             //Add error handling here
-            console.error(Error);
-            updateDOM.displayError(Error);
+            //console.error(Error);
+            //updateDOM.displayError(Error);
         } finally {
             updateDOM.removeLoading();
         }

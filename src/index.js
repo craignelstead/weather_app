@@ -40,16 +40,16 @@ const initializer = (function() {
 
         } catch(Error) {
             //Add error handling here
-            console.error(Error);
-            updateDOM.displayError(Error);
+            //console.error(Error);
+            //updateDOM.displayError(Error);
         } finally {
             updateDOM.removeLoading();
+            updateDOM.clearMessage();
         }
     }
 
     defaults();
     updateDOM.displayYear();
-    //updateDOM.showSavedInput();
     updateDOM.addListeners();
 
 })();
